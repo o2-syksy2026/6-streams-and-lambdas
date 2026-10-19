@@ -1,9 +1,11 @@
-> [!NOTE]  
+> [!NOTE]
 > The English translation for this exercise can be found in [this file](./readme.en.md).
 
-# Streamit ja Lambdat
+# Streamit ja lambdat
 
-Tässä tehtävärepositoriossa perehdytään Javan stream-apiin sekä lambda-lausekkeisiin. Harjoitus on jaettu osiin, joista jokainen sisältää Java-luokan, jossa on keskeneräisiä metodeja. Tavoitteesi on täydentää näiden metodien logiikkaa käyttäen streameja ja lambdoja.
+![Stream liukuhihnana: arvot kulkevat filter- ja map-vaiheiden läpi listaksi](img/chapters/streams.svg)
+
+Tässä tehtävärepositoriossa perehdytään Javan Stream API:in sekä lambda-lausekkeisiin. Harjoitus on jaettu osiin, joista jokaisessa on Java-luokka, jonka keskeneräiset metodit täydennät streamien ja lambdojen avulla niiden kommenttien ja vinkkien mukaisesti. Tehtäväpaketissa ei ole pääohjelmaa, vaan jokaisella osalla on omat yksikkötestinsä.
 
 Suositellut itseopiskelumateriaalit:
 
@@ -12,136 +14,104 @@ Suositellut itseopiskelumateriaalit:
 * [Optionals In Java (Coding with John, YouTube)](https://youtu.be/vKVzRbsMnTQ)
 * [The Java 8 Stream API Tutorial (baeldung.com)](https://www.baeldung.com/java-8-streams)
 
+## Tehtävän aloittaminen
 
+Forkkaa ensin tämä repositorio omaan GitHub-repositorioosi GitHubin **Fork**-painikkeella ja kloonaa vasta sitten oma forkkisi koneellesi:
 
-## Tehtävien testaaminen
+```sh
+git clone https://github.com/<oma-github-tunnuksesi>/6-streams-and-lambdas.git
+```
 
-Tämä tehtäväpaketti ei sisällä ns. "pääohjelmaa" (`main`-metodia). Pääohjelman sijasta paketti sisältää jokaiselle tehtävän osalle omat [JUnit-yksikkötestit](./src/test/java/). Testeihin perehtyminen ei ole tehtävän suorittamiseksi välttämätöntä, mutta testien suorittaminen on ehdottomasti suositeltua, jotta saat palautetta tekemiesi ratkaisujen toimivuudesta.
+Avaa kloonattu projekti koodieditorissasi.
 
-Voit suorittaa yksikkötestit koodieditorisi testaustyökalulla ([VS Code](https://code.visualstudio.com/docs/java/java-testing), [Eclipse](https://www.vogella.com/tutorials/JUnitEclipse/article.html)) tai [Gradle-automaatiotyökalulla](https://docs.gradle.org/current/userguide/java_testing.html). Halutessasi voit myös toteuttaa omia `main`-metodeja, joiden avulla kokeilet ratkaisujesi toimivuutta.
+## Testaaminen
 
-💡 *Saat kirjoittaa halutessasi lisää testejä, mutta älä muuta tai poista valmiiksi kirjoitettuja testejä.*
+Tehtävän osille on valmiit [JUnit](https://junit.org/)-yksikkötestit hakemistossa [src/test/java](./src/test/java/). Kunkin osan kohdalla kerrotaan, millä testiluokalla se arvioidaan. Voit ajaa testit koodieditorisi testaustyökalulla ([VS Code](https://code.visualstudio.com/docs/java/java-testing), [Eclipse](https://www.vogella.com/tutorials/JUnitEclipse/article.html)) tai [Gradlella](https://docs.gradle.org/current/userguide/java_testing.html), esimerkiksi:
 
-💡 *Tehtävänannossa määritettyjen metodien ja luokkien nimien, parametrien tai paluuarvojen muuttaminen ei ole sallittua testien toimivuuden varmistamiseksi.*
+```
+./gradlew test --tests IntegerStreamsTest        # unix
+.\gradlew.bat test --tests IntegerStreamsTest    # windows
+```
 
+Lisää komennon loppuun `--info`, jos haluat tarkemmat tiedot epäonnistuneista testeistä. Testien tekniseen toteutukseen ei tarvitse perehtyä, ja voit kokeilla ratkaisuasi myös omalla `main`-metodilla. Saat kirjoittaa omia testejä lisää, mutta älä muuta tai poista valmiita testejä.
 
-## Tehtävän palauttaminen
+Älä muuta valmiiden luokkien, metodien ja konstruktorien nimiä, parametreja tai paluuarvojen tyyppejä, sillä silloin testit eivät käänny. Saat tiedoston alkuperäisen version takaisin komennolla `git restore <tiedoston polku>` tai kurssijärjestelmän **Palauta lähtökoodi** -toiminnolla.
 
-Tämän tehtävän ratkaisuja ei arvioi mikään GitHub Actions -tehtävävirta (YAML-workflow), eikä `git push` käynnistä arviointia. Arvioinnin tekee kurssijärjestelmä: lähetä ratkaisusi tehtävän sivulla kurssijärjestelmässä, jolloin koodisi käännetään ja sille ajetaan tehtävän JUnit-testit.
+## Palauttaminen ja pisteet
 
-Pushaa lopuksi kaikki julkiseen GitHub-repositorioosi ja paina tehtävän sivulla **Lähetä tarkistettavaksi** -nappia. Kurssijärjestelmän botti käy silloin hakemassa koodisi repositoriostasi ja tarkistaa sen samoilla testeillä.
+Jokaisella tehtävän osalla on kurssijärjestelmässä (https://jtjuslin.kapsi.fi/java) oma sivunsa, jonka koodikentissä on osan koodipohja. Kopioi ratkaisusi koodikenttiin tai kirjoita se suoraan niihin. **Testaa ilman palautusta** ajaa osan testit tallentamatta pisteitä, ja **Lähetä** palauttaa ratkaisun. Jokainen testiluokka hyväksytään vain, jos sen kaikki testit menevät läpi, ja pisteet jaetaan hyväksyttyjen testiluokkien mukaan.
 
-💡 *Voit lähettää ratkaisusi niin monta kertaa kuin on tarpeen luvun määräaikaan asti. Voimaan jää paras saamasi tulos.*
+**Pisteet kahdessa vaiheessa**
+
+1. Kun ratkaisusi menee läpi kurssijärjestelmässä, saat osasta **puolet pisteistä**.
+2. Pushaa lopuksi kaikki julkiseen GitHub-repositorioosi. Paina tämän jälkeen osan sivulla **Lähetä tarkistettavaksi** -nappia. Kun testit menevät läpi, saat osasta **täydet pisteet**. Repositorio saa jäädä julkiseksi.
+
+GitHubissa ei ole arvioivaa YAML-tehtävävirtaa (GitHub Actions -workflowta), eikä `git push` käynnistä arviointia. Kun painat **Lähetä tarkistettavaksi**, kurssijärjestelmän botti hakee koodisi repositoriostasi ja tarkistaa sen samoilla testeillä. Molemmat vaiheet pitää tehdä ennen luvun määräaikaa. Voit lähettää ratkaisusi niin monta kertaa kuin tarvitset, ja voimaan jää paras tulos.
 
 
 ## Osa 1: IntegerStreams *(perusteet, 10 %)*
 
-Tässä osassa opit hyödyntämään [Javan IntStream-luokan](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/IntStream.html) valmiita metodeja, jotka suorittavat tyypillisiä laskuoperaatioita striimeille, jotka sisältävät ainoastaan kokonaislukuja. Tehtävän tukena tarvitset mm. [Javan dokumentaatiota](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/IntStream.html).
+Opit käyttämään [IntStream-luokan](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/IntStream.html) valmiita metodeja, jotka tekevät tyypillisiä laskuoperaatioita kokonaislukuja sisältäville streameille. Täydennä [IntegerStreams](./src/main/java/part01/IntegerStreams.java)-luokan metodit.
 
-Täydennä [`IntegerStreams`-luokassa](./src/main/java/part01/IntegerStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [`IntegerStreamsTest`-testiluokalla](./src/test/java/part01/IntegerStreamsTest.java), jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
+Arvioinnissa ajetaan testiluokka [IntegerStreamsTest](./src/test/java/part01/IntegerStreamsTest.java).
 
-```
-./gradlew test --tests IntegerStreamsTest      # unix
-.\gradlew.bat test --tests IntegerStreamsTest  # windows
-```
 
 ## Osa 2: OptionalValues *(perusteet, 10 %)*
 
-Tässä osassa opit käsittelemään tilanteita, joissa stream ei välttämättä sisällä yhtään arvoa, mikä tulee huomioida esimerkiksi keskiarvoa tai ääriarvoja selvitettäessä. Java hyödyntää tällaisissa tilanteissa "optional"-olioita, joista voit lukea lisää Javan dokumentaatiosta: [Optional](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html), [OptionalDouble](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalDouble.html) ja [OptionalInt](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html).
+Opit käsittelemään tilanteita, joissa stream ei välttämättä sisällä yhtään arvoa, mikä pitää huomioida esimerkiksi keskiarvoa tai ääriarvoja laskettaessa. Java käyttää tällöin "optional"-olioita: [Optional](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html), [OptionalDouble](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalDouble.html) ja [OptionalInt](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html). Täydennä [OptionalValues](./src/main/java/part02/OptionalValues.java)-luokan metodit.
 
-Täydennä [`OptionalValues`-luokassa](./src/main/java/part02/OptionalValues.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [`OptionalValuesTest`-testiluokalla](./src/test/java/part02/OptionalValuesTest.java), jonka voit suorittaa joko koodieditorisi testaustyökalulla tai Gradlella:
+Arvioinnissa ajetaan testiluokka [OptionalValuesTest](./src/test/java/part02/OptionalValuesTest.java).
 
-```
-./gradlew test --tests OptionalValuesTest      # unix
-.\gradlew.bat test --tests OptionalValuesTest  # windows
-```
 
 ## Osa 3: ListsAndStreams *(perusteet, 10 %)*
 
-Tässä osassa opit luomaan striimejä listoista sekä muodostamaan listoja streameista.
+Opit luomaan streameja listoista ja muodostamaan listoja streameista. Täydennä [ListsAndStreams](./src/main/java/part03/ListsAndStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [ListsAndStreams.java](./src/main/java/part03/ListsAndStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [ListsAndStreamsTest.java](./src/test/java/part03/ListsAndStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
+Arvioinnissa ajetaan testiluokka [ListsAndStreamsTest](./src/test/java/part03/ListsAndStreamsTest.java).
 
-```
-./gradlew test --tests ListsAndStreamsTest      # unix
-.\gradlew.bat test --tests ListsAndStreamsTest  # windows
-```
 
 ## Osa 4: MappingStreams *(perusteet, 10 %)*
 
-Tässä osassa opit muodostamaan uusia streameja muuntamalla olemassa olevan streamin arvoja. Muunnoksissa tarvitset operaatioita, jotka toteutetaan tyypillisesti lambda-lausekkeina.
+Opit muodostamaan uusia streameja muuntamalla olemassa olevan streamin arvoja. Muunnokset toteutetaan tyypillisesti lambda-lausekkeina. Täydennä [MappingStreams](./src/main/java/part04/MappingStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [MappingStreams.java](./src/main/java/part04/MappingStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [MappingStreamsTest.java](./src/test/java/part04/MappingStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
-```
-./gradlew test --tests MappingStreamsTest      # unix
-.\gradlew.bat test --tests MappingStreamsTest  # windows
-```
+Arvioinnissa ajetaan testiluokka [MappingStreamsTest](./src/test/java/part04/MappingStreamsTest.java).
+
 
 ## Osa 5: FilteringStreams *(perusteet, 10 %)*
 
-Hyvin tavallinen streamien käyttötapaus on aineiston suodattaminen eli filtteröinti. Tässä osassa opit suodattamaan striimeistä vain tietyt ehdot täyttävät arvot, jotka tulevat osaksi uutta striimiä.
+Hyvin tavallinen streamien käyttötapaus on aineiston suodattaminen. Opit valitsemaan streamista vain tietyt ehdot täyttävät arvot uuteen streamiin. Täydennä [FilteringStreams](./src/main/java/part05/FilteringStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [FilteringStreams.java](./src/main/java/part05/FilteringStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [FilteringStreamsTest.java](./src/test/java/part05/FilteringStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
+Arvioinnissa ajetaan testiluokka [FilteringStreamsTest](./src/test/java/part05/FilteringStreamsTest.java).
 
-```
-./gradlew test --tests FilteringStreamsTest      # unix
-.\gradlew.bat test --tests FilteringStreamsTest  # windows
-```
 
 ## Osa 6: PredicatesWithStreams *(perusteet, 10 %)*
 
-Tässä tehtävässä opit tarkastamaan koko striimiä koskevia ehtoja.
+Opit tarkistamaan koko streamia koskevia ehtoja. Täydennä [PredicatesWithStreams](./src/main/java/part06/PredicatesWithStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [PredicatesWithStreams.java](./src/main/java/part06/PredicatesWithStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [PredicatesWithStreamsTest.java](./src/test/java/part06/PredicatesWithStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
+Arvioinnissa ajetaan testiluokka [PredicatesWithStreamsTest](./src/test/java/part06/PredicatesWithStreamsTest.java).
 
-```
-./gradlew test --tests PredicatesWithStreamsTest      # unix
-.\gradlew.bat test --tests PredicatesWithStreamsTest  # windows
-```
 
 ## Osa 7: ObjectStreams *(soveltava, 10 %)*
 
-Tässä osassa sovellamme Javan streameja oman [Person](./src/main/java/person/Person.java)-luokan kanssa. Tulet huomaamaan, että omien luokkien käsittely streameilla on lopulta hyvin samanlaista kuin Javan valmiiden tietotyyppien käsittely.
+Sovellat streameja oman [Person](./src/main/java/person/Person.java)-luokan kanssa ja huomaat, että omien luokkien käsittely streameilla on hyvin samanlaista kuin Javan valmiiden tietotyyppien. Täydennä [ObjectStreams](./src/main/java/part07/ObjectStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [ObjectStreams.java](./src/main/java/part07/ObjectStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [ObjectStreamsTest.java](./src/test/java/part07/ObjectStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
+Arvioinnissa ajetaan testiluokka [ObjectStreamsTest](./src/test/java/part07/ObjectStreamsTest.java).
 
-```
-./gradlew test --tests ObjectStreamsTest      # unix
-.\gradlew.bat test --tests ObjectStreamsTest  # windows
-```
 
 ## Osa 8: PersonStreams *(soveltava, 10 %)*
 
-Tässä osassa sovellamme oppimaamme ja muunnamme merkkijonoja [Person](./src/main/java/person/Person.java)-olioiksi ja toisin päin. Opimme myös tekemään soveltavia operaatioita, kuten kaikkien striimissä olevien henkilöiden iän kasvattamisen yhdellä vuodella.
+Muunnat merkkijonoja [Person](./src/main/java/person/Person.java)-olioiksi ja toisin päin sekä teet soveltavia operaatioita, kuten kaikkien streamin henkilöiden iän kasvattamisen yhdellä vuodella. Täydennä [PersonStreams](./src/main/java/part08/PersonStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [PersonStreams.java](./src/main/java/part08/PersonStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [PersonStreamsTest.java](./src/test/java/part08/PersonStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
-
-```
-./gradlew test --tests PersonStreamsTest      # unix
-.\gradlew.bat test --tests PersonStreamsTest  # windows
-```
+Arvioinnissa ajetaan testiluokka [PersonStreamsTest](./src/test/java/part08/PersonStreamsTest.java).
 
 
 ## Osa 9: PizzaStreams *(edistynyt, 20 %)*
 
-Tehtävän viimeisessä osassa käsittelemme [Pizzoja](./src/main/java/pizza/Pizza.java) ja pizzojen täytteitä streamien avulla. Keskitymme erityisesti ananakseen, joka on täytteenä erityisen kiistanalainen. Ohessa harjoittelemme soveltavia operaatioita, kuten streamien järjestämistä.
+Käsittelet [pizzoja](./src/main/java/pizza/Pizza.java) ja niiden täytteitä streamien avulla. Keskitymme erityisesti ananakseen, joka on täytteenä erityisen kiistanalainen, ja harjoittelemme soveltavia operaatioita, kuten streamien järjestämistä. Täydennä [PizzaStreams](./src/main/java/part09/PizzaStreams.java)-luokan metodit.
 
-Täydennä tiedostossa [PizzaStreams.java](./src/main/java/part09/PizzaStreams.java) olevat metodit niiden kommenttien ja vinkkien mukaisesti. Tehtävän tämä osa testataan [PizzaStreamsTest.java](./src/test/java/part09/PizzaStreamsTest.java)-testiluokalla, jonka voit suorittaa joko koodieditorisi testaustyökalulla, tai Gradlella:
-
-```
-./gradlew test --tests PizzaStreamsTest      # unix
-.\gradlew.bat test --tests PizzaStreamsTest  # windows
-```
+Arvioinnissa ajetaan testiluokka [PizzaStreamsTest](./src/test/java/part09/PizzaStreamsTest.java).
 
 
 ## Lisenssi ja tekijät
 
-Tämän tehtävän on kehittänyt Teemu Havulinna ja se on lisensoitu [Creative Commons BY-NC-SA -lisenssillä](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-Tehtävänannon, käsiteltävien tiedostojen sekä lähdekoodien toteutuksessa on hyödynnetty ChatGPT 3.5:ttä sekä GitHub copilot -tekoälyavustinta.
-
-## Ratkaisun tallentaminen
-
-Forkkaa tämä tehtäväpohja omaan GitHub-repositorioosi ja tallenna ratkaisusi omaan forkkiisi. Repositorio saa olla julkinen.
-
-Palauta ratkaisusi kurssijärjestelmään tehtävän sivulla.
+Tämän tehtävän ovat kehittäneet Teemu Havulinna ja Jukka Juslin, ja se on lisensoitu [Creative Commons BY-NC-SA -lisenssillä](https://creativecommons.org/licenses/by-nc-sa/4.0/). Tehtävänannon, lähdekoodien ja testien toteutuksessa on hyödynnetty ChatGPT 3.5 -kielimallia sekä GitHub Copilot -tekoälyavustinta.

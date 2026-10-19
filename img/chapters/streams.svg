@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 170" role="img" aria-labelledby="t">
+  <title id="t">Stream liukuhihnana: arvot kulkevat filter- ja map-vaiheiden läpi listaksi</title>
+  <rect x="1" y="1" width="318" height="168" rx="14" fill="#fbf7f0" stroke="#dcd8ce"/>
+  <!-- liukuhihna -->
+  <rect x="14" y="98" width="292" height="14" rx="7" fill="#dcd8ce"/>
+  <g fill="#fbf7f0"><circle cx="24" cy="105" r="3"/><circle cx="160" cy="105" r="3"/><circle cx="296" cy="105" r="3"/></g>
+  <!-- arvot ennen suodatusta -->
+  <g stroke="#fffdf9" stroke-width="2">
+    <circle cx="28" cy="84" r="10" fill="#b74a26"/>
+    <circle cx="52" cy="84" r="10" fill="#9a9ea1"/>
+    <circle cx="76" cy="84" r="10" fill="#b74a26"/>
+  </g>
+  <!-- filter-suppilo -->
+  <path d="M94 36 H142 L124 66 V92 H112 V66 z" fill="#f7e6bd" stroke="#d59b2a" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="118" cy="84" r="8" fill="#b74a26" stroke="#fffdf9" stroke-width="2"/>
+  <circle cx="132" cy="134" r="8" fill="#9a9ea1" opacity=".55"/>
+  <path d="M126 112 L131 124" stroke="#9a9ea1" stroke-width="2" stroke-dasharray="3 3"/>
+  <!-- map-vaihe muuttaa ympyrät neliöiksi -->
+  <rect x="166" y="40" width="54" height="40" rx="8" fill="#e0efe5" stroke="#2d6a4f" stroke-width="2"/>
+  <path d="M180 60 h10 m-4 -5 l5 5 l-5 5" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="196" y="53" width="13" height="13" rx="2" fill="#2d6a4f"/>
+  <g fill="#2d6a4f" stroke="#fffdf9" stroke-width="2">
+    <rect x="232" y="75" width="19" height="19" rx="3"/>
+    <rect x="256" y="75" width="19" height="19" rx="3"/>
+  </g>
+  <!-- tulos listaksi -->
+  <path d="M282 64 h22 v34 h-22 z" fill="none" stroke="#1c2327" stroke-width="2"/>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12">
+    <text x="94" y="28" fill="#8c3419">filter</text>
+    <text x="176" y="32" fill="#2d6a4f">map</text>
+    <text x="268" y="56" fill="#1c2327">toList</text>
+    <text x="14" y="154" fill="#5f6b70">x -&gt; x &gt; 0</text>
+  </g>
+</svg>
