@@ -21,7 +21,12 @@ You can run the unit tests using your code editor's testing tool ([VS Code](http
 
 ## Submitting the exercise
 
-Submit the task using Git's `add`, `commit`, and `push` commands as you did with previous tasks. You can submit your solution for evaluation as many times as needed until the task deadline. However, ensure that the latest submission produces the best scores, as only the most recent scores will be considered.
+Solutions to this exercise are not graded by any GitHub Actions workflow (YAML), and `git push` does not start any grading. Grading is done by the course system: submit your solution on the exercise page in the course system, where your code is compiled and the exercise's JUnit tests are run.
+
+Finally, push everything to your public GitHub repository and press the **Lähetä tarkistettavaksi** (submit for checking) button on the exercise page. The course system's bot then fetches your code from your repository and checks it with the same tests.
+
+💡 *You can submit your solution as many times as needed until the chapter deadline. Your best result is kept.*
+
 
 ## Part 1: IntegerStreams *(basics, 10 %)*
 
