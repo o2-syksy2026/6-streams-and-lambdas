@@ -142,6 +142,6 @@ Tehtävänannon, käsiteltävien tiedostojen sekä lähdekoodien toteutuksessa o
 
 ## Ratkaisun tallentaminen
 
-Tee tästä tehtäväpohjasta oma kopio (fork tai kopio) ja tallenna ratkaisusi myös **yksityiseen (private) GitHub-repositorioon omalla GitHub-tililläsi**. Älä julkaise ratkaisuasi julkisessa repositoriossa.
+Forkkaa tämä tehtäväpohja omaan GitHub-repositorioosi ja tallenna ratkaisusi omaan forkkiisi. Repositorio saa olla julkinen.
 
-Palauta ratkaisusi opettajan ilmoittamaan palautusjärjestelmään.
+Palauta ratkaisusi kurssijärjestelmään tehtävän sivulla.
